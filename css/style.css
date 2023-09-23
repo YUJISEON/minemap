@@ -146,6 +146,34 @@
     font-weight: 700;
 }
 
+.cluster {
+    border-radius: 50%;
+    color: #fff;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.0rem;
+    background: rgba(255, 149, 79, 0.7);
+}
+
+.cluster1 {
+    width: 25px;
+    height: 25px;
+    line-height: 26px;
+
+}
+
+.cluster2 {
+    width: 30px;
+    height: 30px;
+    line-height: 31px;
+}
+
+.cluster3 {
+    width: 35px;
+    height: 35px;
+    line-height: 36px;
+}
+
 #pagination {
     margin:10px auto;
     text-align: center;

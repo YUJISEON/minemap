@@ -44,7 +44,7 @@ function placesSearchCB(data, status, pagination) {
         // 정상적으로 검색이 완료됐으면, 검색 목록과 마커를 표출
         displayPlaces(data);
         // 페이지 번호를 표출
-        // displayPagination(pagination);
+        displayPagination(pagination);
     } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
         alert('검색 결과가 존재하지 않습니다.');
         return;
@@ -65,6 +65,11 @@ function displayPlaces(data) {
     // LatLngBounds 함수 : 지도에서 검색했을 때, 해당 지점으로 이동하면서 그 영역을 보여주는 기능이 있는데 마커들에 대한 영역들을 계산해서 그 영역을 보여주게됨
     // 마커의 좌표를 저장하고 이를 바탕으로 이동을 시키게 되면 영역들이 모두 표시되는 지도를 만들 수 있음
     let bounds = new kakao.maps.LatLngBounds();
+
+    // 검색 결과 목록에 추가된 항목들을 제거
+    removeAllChildNods(listEl);
+    // 지도에 표시되고 있는 마커를 제거
+    removeMarker();    
 
     // 반복문을 통해 안에 있는 데이터들을 리스트 형태로 만들어주고 마커로 표시하는 기능
     for (let i=0 ; i<data.length ; i++ ) {
@@ -116,12 +121,12 @@ function displayPlaces(data) {
     map.setBounds(bounds);
 }
 
-function displayInfowindow(marker, place, adress, lat, lng) {
+function displayInfowindow(marker, title, adress, lat, lng) {
     let content = `
     <div style="padding:25px">
-        ${place} <br>
+        ${title} <br>
         ${adress} <br>
-        <button>등록</button>
+        <button onclick="onSubmit('${title}', '${adress}', '${lat}', ${lng})">등록</button>
     <div>
     `;
 
@@ -135,6 +140,36 @@ function displayInfowindow(marker, place, adress, lat, lng) {
     // 지도에 인포윈도우를 올림
     // marker가 주어지면, 해당 마커에서 열린 효과를 냄
     infowindow.open(map, marker)
+}
+
+// 검색결과 목록의 자식 Element를 제거하는 함수
+function removeAllChildNods(el) {   
+    while (el.hasChildNodes()) {
+        el.removeChild(el.lastChild);
+    }
+}
+
+// 지도 위에 표시되고 있는 마커를 모두 제거
+function removeMarker() {
+    for ( var i = 0; i < markerList.length; i++ ) {
+        markerList[i].setMap(null);
+    }   
+    markerList = [];
+}
+
+function onSubmit(title, adress, lat, lng) {
+    // 데이터 저장
+    /*
+    $.ajax({
+        url : "/location",
+        data : {title, adress, lat, lng},
+        type : "POST",
+    }).done((response)=>{
+        console.log("데이터 요청 성공");
+    }).fail((error)=>{
+        console.log("데이터 요청 실패");
+    })
+    */
 }
 
 // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
@@ -165,5 +200,6 @@ function displayPagination(pagination) {
 
         fragment.appendChild(el);
     }
+
     paginationEl.appendChild(fragment);
 }
