@@ -1,6 +1,3 @@
-
-
-
 let mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOptions = { 
     center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -17,10 +14,11 @@ let infowindow = new kakao.maps.InfoWindow({
 })
 
 let markerList = [];
+let preResults = [];
+let pageSize = 15;
 
 // services 라이브러리 Places() 함수 - 장소 검색 객체를 생성
 let ps = new kakao.maps.services.Places();
-
 
 // 키워드로 장소를 검색
 // searchPlaces();
@@ -29,12 +27,12 @@ let ps = new kakao.maps.services.Places();
 // 화살표 함수로 만들 경우, 먼저 함수를 정의하고 함수를 호출 필요 - 번거로움
 function searchPlaces() {
     let keyword = $('#keyword').val();
-    console.log("키워드 : " + keyword);
+    //console.log("키워드 : " + keyword);
 
     // 장소검색 객체(ps)의 keywordSearch 함수를 통해 키워드로 장소검색을 요청
     // 키워드를 통해서 검색을 하고, 검색 결과를 placesSearchCB 함수를 통해서 콜백
     // option : size 한 페이지에 보여질 목록 개수. 기본값은 15, 1~15까지 가능
-    ps.keywordSearch(keyword, placesSearchCB, { size: 15 }); 
+    ps.keywordSearch(keyword, placesSearchCB, { size: pageSize }); 
 
 }
 
@@ -44,11 +42,21 @@ function searchPlaces() {
 // 결과값이 data로 전달되고 status는 결과값을 반환하기 위한 서버에 대한 상태가 담김
 function placesSearchCB(data, status, pagination) {
     if (status === kakao.maps.services.Status.OK) {
+
+        if (!(pagination.current <= pagination.last)) { 
+            preResults = [];
+        }
+
+        preResults = preResults.concat(data);
+
         // 정상적으로 검색이 완료됐으면, 검색 목록과 마커를 표출
-        displayPlaces(data);
+        displayPlaces(preResults);        
+
+        // 페이징 기능 - 더보기 버튼
+        morePagination(pagination);
 
         // 페이징 기능 - 페이지 번호를 표출
-        displayPagination(pagination);
+        // displayPagination(pagination);
     } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
         alert('검색 결과가 존재하지 않습니다.');
         return;
@@ -174,6 +182,24 @@ function onSubmit(title, adress, lat, lng) {
         console.log("데이터 요청 실패");
     })
     */
+}
+
+/**************************************************************/
+function morePagination(pagination) {
+    // 특정 엘리먼트를 클릭했을 경우 다음 페이지 검색을 시도하는 예제    
+    var moreBtn = document.getElementById('moreBtn');
+    moreBtn.addEventListener('click', function () {
+        // 속성 값으로 다음 페이지가 있는지 확인하고
+        if (pagination.hasNextPage) {
+            // 있으면 다음 페이지를 검색한다.
+            pagination.nextPage();
+        } 
+    }, { once : true });
+
+    if( !pagination.hasNextPage) {
+        moreBtn.style.display = 'none'; 
+    }    
+
 }
 
 /**************************************************************/

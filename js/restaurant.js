@@ -53,6 +53,24 @@ const dataSet = [
         url: "https://www.youtube.com/watch?v=mPZTFNbyuss&t=81s",
         category: "일식",
     },
+    {
+        title: "냠냠물고기",
+        address: "서울 송파구 송파대로30길 41-21",        
+        url: "https://www.youtube.com/watch?v=3J98MLveRlI",
+        category: "회/초밥",
+    },
+    {
+        title: "승리돼지국밥",
+        address: "경남 창원시 진해구 진해대로 640",        
+        url: "https://www.youtube.com/watch?v=VP2APbEQ9zo",
+        category: "한식",
+    },
+    {
+        title: "85번실내포장마차",
+        address : "경남 진주시 동진로 208-1",        
+        url: "https://www.youtube.com/watch?v=hzNaa4F-8Z8",
+        category: "한식",
+    }
 ];
 
 /*
@@ -65,6 +83,7 @@ https://apis.map.kakao.com/web/sample/addr2coord/ (주소로 장소 표시하기
 
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
+
 
 // 주소-좌표 변환 함수
 function getCoordsByAddress(address) {
@@ -122,10 +141,15 @@ async function setMap(dataSet) {
     markerArray = [];
     infowindowArray = [];
 
-    for (var i = 0; i < dataSet.length; i++) {
+    let bounds = new kakao.maps.LatLngBounds();
+
+    for (let i = 0; i < dataSet.length; i++) {
         // 마커를 생성합니다
         let coords = await getCoordsByAddress(dataSet[i].address);
-        var marker = new kakao.maps.Marker({
+
+        bounds.extend(coords);
+
+        let marker = new kakao.maps.Marker({
             map: map, // 마커를 표시할 지도
             position: coords, // 마커를 표시할 위치
         });
@@ -133,7 +157,7 @@ async function setMap(dataSet) {
         markerArray.push(marker);
 
         // 마커에 표시할 인포윈도우를 생성합니다
-        var infowindow = new kakao.maps.InfoWindow({
+        let infowindow = new kakao.maps.InfoWindow({
             content: getContent(dataSet[i]), // 인포윈도우에 표시할 내용
         });
 
@@ -147,6 +171,8 @@ async function setMap(dataSet) {
         kakao.maps.event.addListener(marker, "click", makeOverListener(map, marker, infowindow, coords));
         kakao.maps.event.addListener(map, "click", makeOutListener(infowindow));
     }
+
+    map.setBounds(bounds);
 }
 
 // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
@@ -218,15 +244,17 @@ function categoryHandler(event) {
         categoryData = dataSet;
     }
 
-        
-    // 기존 마커 삭제
-    closeMarker();
+    if( categoryData.length ) {
+        // 기존 마커 삭제
+        closeMarker();
 
-    // 기존 인포윈도우 닫기
-    closeInfoWindow();
+        // 기존 인포윈도우 닫기
+        closeInfoWindow();
 
-    setMap(categoryData);
-
+        setMap(categoryData);
+    } else {
+        alert('데이터가 존재하지 않습니다.');
+    }
 }
 
 let markerArray = [];

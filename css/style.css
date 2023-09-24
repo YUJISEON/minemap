@@ -135,14 +135,18 @@
     font-weight: 500;
 }
 
-.ser-bth {
+.ser-bth,
+#moreBtn {
+    display: block;
     width: 100%;
     text-align: center;
     padding: 0 5px;
     background: lightgray;
     margin: 5px auto;
+    font-size: 1.5rem;
     font-weight: 700;
     color: #000;
+    box-sizing: border-box;
 }
 
 #searchWrap hr {
