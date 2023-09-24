@@ -123,11 +123,11 @@ function displayPlaces(data) {
 
 function displayInfowindow(marker, title, adress, lat, lng) {
     let content = `
-    <div style="padding:25px">
+    <div style="padding:25px 10px">
         ${title} <br>
         ${adress} <br>
         <button onclick="onSubmit('${title}', '${adress}', '${lat}', ${lng})">등록</button>
-    <div>
+    </div>
     `;
 
     //인포윈도우를 보여줄 때 해당 위치로 이동

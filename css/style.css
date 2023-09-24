@@ -31,6 +31,37 @@
     background: #111;
 }
 
+#infoBox {
+    position: absolute;
+    top: 70px;
+    left: 10px;
+    z-index: 1000;
+    width: 200px;
+}
+
+#infoBox li + li {
+    margin-top: 10px;
+}
+
+#infoBox .info-wrap,
+#infoBox .info-btn {
+    display: block;
+    width: 100%;
+    background: #fff;
+    padding: 10px;
+    border: 1px solid;
+    color: #000;
+    box-sizing: border-box;
+}
+
+#infoBox .info-wrap .info-tit {
+    font-weight: 700;
+}
+
+#infoBox .info-btn {
+    text-align: center;
+    font-weight: 700;
+}
 
 #map { 
     width:100%;
@@ -94,17 +125,17 @@
     box-sizing: border-box;
 }
 
-#searchWrap .keyword-box {
+.keyword-box {
     font-weight: 700;
 }
 
-#searchWrap .keyword-box #keyword {
+.keyword-box #keyword {
     box-sizing: border-box;
     width: 100%;
     font-weight: 500;
 }
 
-#searchWrap .ser-bth {
+.ser-bth {
     width: 100%;
     text-align: center;
     padding: 0 5px;
@@ -151,27 +182,55 @@
     color: #fff;
     text-align: center;
     font-weight: 700;
-    font-size: 1.0rem;
-    background: rgba(255, 149, 79, 0.7);
+    font-size: 1.0rem;    
 }
 
 .cluster1 {
     width: 25px;
     height: 25px;
     line-height: 26px;
-
+    background: rgba(11, 252, 107, 0.7);
 }
 
 .cluster2 {
     width: 30px;
     height: 30px;
     line-height: 31px;
+    background: rgba(249, 26, 6, 0.7);
 }
 
 .cluster3 {
     width: 35px;
     height: 35px;
     line-height: 36px;
+    background: rgba(253, 232, 4, 0.7);
+}
+
+.current {
+    display: block;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 50%;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid red;
+    box-shadow: 0 0 0 rgb(204, 49, 44);
+    animation: pulse 1.7s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(204, 49, 44, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 20px rgba(204, 49, 44, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(204, 49, 44,0);
+    }
 }
 
 #pagination {
@@ -187,4 +246,15 @@
     font-weight: bold; 
     cursor: default;
     color:#777;
+}
+
+.tooltip {
+    display:none;
+    position:absolute;
+    z-index:1000;
+    padding:5px 10px;
+    background:#fff;
+    border:1px solid;
+    font-size:1.4rem;
+    pointer-events: none;
 }
