@@ -123,10 +123,10 @@ function displayPlaces(data) {
 
 function displayInfowindow(marker, title, adress, lat, lng) {
     let content = `
-    <div style="padding:25px 10px">
+    <div id="upload-box" class="infowindow">
         ${title} <br>
         ${adress} <br>
-        <button onclick="onSubmit('${title}', '${adress}', '${lat}', ${lng})">등록</button>
+        <button class="insert-btn" onclick="onSubmit('${title}', '${adress}', '${lat}', ${lng})">등록</button>
     </div>
     `;
 

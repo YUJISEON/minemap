@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>minemap</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2a4454dabebd98017b57e5f942fbbac3&libraries=services"></script> 
+    <script defer src="/js/restaurant.js"></script>
+    <script src="/js/include.js"></script>
+</head>
+<body>
+    <div role="navbar" data-include="/include/navbar_inc.html" ></div>
+    <div id="map"></div>
+    <div id="categoryWrap">
+        <ul class="clear">
+            <li><a href="javascript:;" class="category-item" data-category="all">전체</a></li>
+            <li><a href="javascript:;" class="category-item" data-category="korea">한식</a></li>
+            <li><a href="javascript:;" class="category-item" data-category="china">중식</a></li>
+            <li><a href="javascript:;" class="category-item" data-category="japan">일식</a></li>
+            <li><a href="javascript:;" class="category-item" data-category="america">양식</a></li>
+            <li><a href="javascript:;" class="category-item" data-category="wheat">분식</a></li>
+            <li><a href="javascript:;" class="category-item" data-category="meat">구이</a></li>
+            <li><a href="javascript:;" class="category-item" data-category="sushi">회/초밥</a></li>
+        </ul>
+    </div>
+</body>
+</html>
