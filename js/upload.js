@@ -88,7 +88,7 @@ function displayPlaces(data) {
         // LatLngBounds 객체에 좌표를 추가
         bounds.extend(placePosition);
 
-         // 마커를 생성하고 지도에 표시
+        // 마커를 생성하고 지도에 표시
         let marker = new kakao.maps.Marker({
             position : placePosition
         })

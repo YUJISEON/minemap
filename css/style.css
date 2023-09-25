@@ -76,6 +76,7 @@
     border-radius: 50%;
 }
 
+.infowindow,
 .infowindow-wrap {
     background: #fff;
     padding: 10px;
@@ -123,6 +124,10 @@
     z-index: 3;
     font-size: 1.2rem;
     box-sizing: border-box;
+}
+
+#searchWrap.type2 {
+    top: 140px;
 }
 
 .keyword-box {
