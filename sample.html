@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>minemap</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2a4454dabebd98017b57e5f942fbbac3&libraries=services"></script> 
+    <script defer src="/js/sample.js"></script>
+    <script src="/js/include.js"></script>
+</head>
+<body>
+    <div role="navbar" data-include="/include/navbar_inc.html" ></div>
+    <div id="map"></div>
+    <div id="searchWrap">
+        <form onsubmit="searchPlaces(); return false;">
+            <p class="keyword-box">키워드 : <input type="text" name="keyword" id="keyword" value="" placeholder="검색 키워드를 입력하세요."></p>
+            <button type="submit" class="ser-bth" >검색하기</button>
+            <hr>
+            <div id="placesList">
+                <ul></ul>
+            </div>
+            <div id="pagination"></div>
+        </form>
+    </div>
+</body>
+</html>
