@@ -39,7 +39,13 @@ const data = [
         address : "인천광역시 중구 제2터미널대로 444",
         lat : '37.447474',
         lng : '126.452372'
-    }
+    },
+    {
+        title : "원당역",
+        address : "경기도 고양시 덕양구 고양대로 1429",
+        lat : '37.65312648533672',
+        lng : '126.842964869058752'
+	}
 ]
 
 let markerList = [];
@@ -304,27 +310,15 @@ function displayPagination(pagination) {
 /*                  마커 클러스터링                   */
 /******************************************************/
 
-// 클러스터가 모이는 숫자에 맞게, 클러스터의 크기를 정해줌
-// 10개 미만 - cluster1, 10개 이상 ~ 100개 미만 - cluster2, 100개 이상 - cluster3
-const cluster1 = {
-    content :  `<div class="cluster cluster1"></div>`
-}
-
-const cluster2 = {
-    content :  `<div class="cluster cluster2"></div>`
-}
-
-const cluster3 = {
-    content :  `<div class="cluster cluster3"></div>`
-}
-
 // 마커 클러스터러를 생성합니다 
 var clusterer = new kakao.maps.MarkerClusterer({
     map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
     averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-    minLevel: 10, // 클러스터 할 최소 지도 레벨 
+    minLevel: 3, // 클러스터 할 최소 지도 레벨 
     calculator: [2, 4, 6], // 클러스터의 크기 구분 값, 각 사이값마다 설정된 text나 style이 적용
-    styles: [{ // calculator 각 사이 값 마다 적용될 스타일을 지정한다
+    styles: [
+        // calculator 각 사이 값 마다 적용될 스타일을 지정
+        { // 1개 이하
             width : '30px', height : '30px',
             background: 'rgba(51, 204, 255, .8)',
             borderRadius: '15px',
@@ -333,7 +327,7 @@ var clusterer = new kakao.maps.MarkerClusterer({
             fontWeight: 'bold',
             lineHeight: '31px'
         },
-        {
+        { // 2개부터 3개
             width : '40px', height : '40px',
             background: 'rgba(255, 153, 0, .8)',
             borderRadius: '20px',
@@ -342,7 +336,7 @@ var clusterer = new kakao.maps.MarkerClusterer({
             fontWeight: 'bold',
             lineHeight: '41px'
         },
-        {
+        { // 4개부터 5개
             width : '50px', height : '50px',
             background: 'rgba(255, 51, 204, .8)',
             borderRadius: '25px',
@@ -351,7 +345,7 @@ var clusterer = new kakao.maps.MarkerClusterer({
             fontWeight: 'bold',
             lineHeight: '51px'
         },
-        {
+        { // 6개 이상
             width : '60px', height : '60px',
             background: 'rgba(255, 80, 80, .8)',
             borderRadius: '30px',
